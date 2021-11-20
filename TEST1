@@ -1,0 +1,21 @@
+import requests
+import os
+from bs4 import BeautifulSoup
+import json
+
+userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
+headers = {
+    "User-Agent": userAgent
+}
+
+Url= "https://seekingalpha.com/api/v3/news/3609381"
+
+ss= requests.session()
+
+res = ss.get(Url, headers=headers)
+soup = BeautifulSoup(res.text, "html.parser")
+content_html = soup.select('li')
+
+for i in content_html:
+    content = i.text
+    print(content)
